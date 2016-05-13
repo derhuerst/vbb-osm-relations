@@ -1,0 +1,13 @@
+{
+	"name":         "vbb-osm-relations",
+	"description":  "VBB lines and their OSM relations.",
+	"version":      "0.1.0",
+	"main":         "index.js",
+	"files":        ["index.js"],
+	"keywords":     ["vbb", "bvg", "berlin", "osm", "open street map"],
+	"author":       "Jannis R <mail@jannisr.de>",
+	"homepage":     "https://github.com/derhuerst/vbb-osm-relations",
+	"repository":   "derhuerst/vbb-osm-relations",
+	"license":      "ISC",
+	"engines":      {"node": ">=4"}
+}
