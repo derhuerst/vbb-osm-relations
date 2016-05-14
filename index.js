@@ -4,7 +4,7 @@ module.exports = {
 
 	// todo: https://de.wikipedia.org/wiki/Liste_der_Eisenbahnlinien_in_Brandenburg_und_Berlin
 
-	, RE1:  [188380, 187767]
+	  RE1:  [188380, 187767]
 	, RE2:  2607475
 	, RE3:  2609916
 	, RE4:  2523200
