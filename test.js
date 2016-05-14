@@ -3,7 +3,6 @@
 
 const test   = require('tape')
 const got    = require('got')
-const toJson = require('xml2json').toJson
 
 
 
@@ -17,10 +16,9 @@ test(`relations exist`, (t) => {
 	ids.forEach((id, i) => {
 
 		got(`http://www.openstreetmap.org/api/0.6/relation/${id}`)
-		.catch((err) => err)
+		.catch((err) => t.fail(err.message))
 		.then((res) => {
-			const data = JSON.parse(toJson(res.body)).osm
-			t.ok(data, `relation ${id} exists`)
+			t.pass(`relation ${id} exists`)
 			if (i === ids.length - 1) t.done()
 		})
 	})
