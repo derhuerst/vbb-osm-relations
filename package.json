@@ -12,12 +12,11 @@
 	"license":      "ISC",
 	"engines":      {"node": ">=6"},
 	"devDependencies": {
-		"got":      "^6.6.3",
-		"tape":     "^4.6.3",
-		"tap-min":  "derhuerst/tap-min"
+		"queue": "^4.0.0",
+		"node-fetch": "^1.6.3"
 	},
 	"scripts": {
-		"test":       "tape test.js | tap-min",
+		"test": "node test.js",
 		"prepublish": "npm test"
 	}
 }
