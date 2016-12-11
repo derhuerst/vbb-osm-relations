@@ -8,12 +8,13 @@
 	"author":       "Jannis R <mail@jannisr.de>",
 	"homepage":     "https://github.com/derhuerst/vbb-osm-relations",
 	"repository":   "derhuerst/vbb-osm-relations",
+	"bugs":         "https://github.com/derhuerst/vbb-osm-relations/issues",
 	"license":      "ISC",
-	"engines":      {"node": ">=4"},
+	"engines":      {"node": ">=6"},
 	"devDependencies": {
-		"got":      "^6.3",
-		"tape":     "^4.5.1",
-		"tap-min":  "^1.1"
+		"got":      "^6.6.3",
+		"tape":     "^4.6.3",
+		"tap-min":  "derhuerst/tap-min"
 	},
 	"scripts": {
 		"test":       "tape test.js | tap-min",
