@@ -29,7 +29,7 @@ module.exports = {
 	, RB25: 5738329
 	, RB26: 78795 // only one direction
 	, RB27: 3393817
-	, RB31: 5372447 // only one direction
+	, RB31: 2607469
 	, RB33: 319621 // only one direction
 	, RB35: 79826 // only one direction
 	, RB36: 3377492
