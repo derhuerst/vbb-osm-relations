@@ -12,10 +12,25 @@ const showError = (err) => {
 	process.exit(1)
 }
 
-const endpoint = 'http://overpass-api.de/api/interpreter'
+const south = 52.364699
+const west = 13.158187
+const north = 52.640563
+const east = 13.640899
+const bbox = [south, west, north, east].join(',')
+
+const endpoint = 'https://overpass-api.de/api/interpreter'
 const query = `\
-	// todo
-`
+[out:json][timeout:25];
+(
+	way["public_transport"="platform"]["subway"="yes"](${bbox});
+	way["railway"="platform"]["subway"="yes"](${bbox});
+	relation["public_transport"="platform"]["subway"="yes"](${bbox});
+	relation["railway"="platform"]["subway"="yes"](${bbox});
+);
+out body;
+>;
+out skel qt;`
+
 const dest = path.join(__dirname, '../platforms.json')
 
 fetch(endpoint + '?' + stringiy({data: query}), {
@@ -37,11 +52,13 @@ fetch(endpoint + '?' + stringiy({data: query}), {
 .then((data) => {
 	const platforms = {} // OSM IDs by VBB station ID
 	for (let platform of data.elements) {
-		const id = findStationByPlatform(platform)
-		if (id) {
-			console.log(`platform ${platform.id} -> station ${id}`)
+		try {
+			const id = findStationByPlatform(platform)
 			platforms[id] = platform.id
-		} else console.error(`platform ${platform.id} does not match`)
+			console.log(`platform ${platform.id} -> station ${id}`)
+		} catch (err) {
+			console.error(err.message)
+		}
 	}
 
 	fs.writeFileSync(dest, JSON.stringify(platforms))
