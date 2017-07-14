@@ -6,9 +6,7 @@ const {fetch} = require('fetch-ponyfill')({Promise: require('pinkie-promise')})
 const assert = require('assert')
 
 const lines = require('./lines')
-const ids = Object.keys(lines)
-	.map((line) => lines[line])
-	.reduce((acc, x) => acc.concat(Array.isArray(x) ? x : [x]), [])
+const platforms = require('./platforms')
 
 const checkIfRelationExists = (id) =>
 	fetch(`https://www.openstreetmap.org/api/0.6/relation/${id}`)
@@ -26,9 +24,14 @@ test.on('erorr', (err) => {
 })
 test.on('success', (id) => console.error(id + ' ✓'))
 
-ids.forEach((id) => test.push((cb) =>
+[]
+.concat(Object.keys(lines), Object.keys(platforms))
+.map((line) => lines[line])
+.reduce((acc, x) => acc.concat(Array.isArray(x) ? x : [x]), [])
+.forEach((id) => test.push((cb) => {
 	checkIfRelationExists(id)
 	.then(() => cb(null, id))
 	.catch(cb)
-))
+}))
+
 test.start()
