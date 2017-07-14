@@ -2,12 +2,12 @@
 'use strict'
 
 const queue = require('queue')
-const fetch = require('node-fetch')
+const {fetch} = require('fetch-ponyfill')({Promise: require('pinkie-promise')})
 const assert = require('assert')
 
-const data   = require('./index')
-const ids = Object.keys(data)
-	.map((line) => data[line])
+const lines = require('./lines')
+const ids = Object.keys(lines)
+	.map((line) => lines[line])
 	.reduce((acc, x) => acc.concat(Array.isArray(x) ? x : [x]), [])
 
 const checkIfRelationExists = (id) =>

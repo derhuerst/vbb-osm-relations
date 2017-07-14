@@ -15,6 +15,16 @@
 npm install vbb-osm-relations
 ```
 
+## Usage
+
+To get the relations of VBB lines:
+
+```js
+const relations = require('vbb-osm-relations/lines')
+
+relations.U7 // 58425
+```
+
 
 ## Contributing
 
