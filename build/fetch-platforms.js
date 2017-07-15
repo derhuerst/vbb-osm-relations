@@ -34,7 +34,7 @@ const dest = path.join(__dirname, '../platforms.json')
 
 queryOverpass(query)
 .then((data) => {
-	const q = queue({concurrency: 1})
+	const q = queue({concurrency: 2})
 	q.on('error', (err) => console.error(err.message))
 
 	const platforms = {} // OSM IDs by VBB station ID

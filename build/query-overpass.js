@@ -1,13 +1,13 @@
 'use strict'
 
-const limit = require('p-limit')(1)
+const retry = require('p-retry')
 const {fetch} = require('fetch-ponyfill')({Promise: require('pinkie-promise')})
 const {stringify} = require('querystring')
 
 const endpoint = 'https://overpass-api.de/api/interpreter'
 
 const queryOverpass = (query) => {
-	return limit(() => {
+	return retry(() => {
 		return fetch(endpoint + '?' + stringify({data: query}), {
 			mode: 'cors',
 			redirect: 'follow',
@@ -24,7 +24,7 @@ const queryOverpass = (query) => {
 			}
 			return res.json()
 		})
-	})
+	}, {minTimeout: 500})
 }
 
 module.exports = queryOverpass
