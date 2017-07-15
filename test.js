@@ -8,30 +8,28 @@ const assert = require('assert')
 const lines = require('./lines')
 const platforms = require('./platforms')
 
-const checkIfRelationExists = (id) =>
-	fetch(`https://www.openstreetmap.org/api/0.6/relation/${id}`)
-	.catch((err) => t.fail(err.message))
+const checkIfElementExists = (type, id) => (cb) => {
+	fetch(`https://www.openstreetmap.org/api/0.6/${type}/${id}`)
 	.then((res) => {
-		if (!res.ok) throw new Error('response not ok at relation ' + id)
+		if (!res.ok) return cb(new Error('response not ok at ' + type + ' ' + id))
+		cb(null, [type, id])
 	})
+	.catch(cb)
+}
 
-
-
-const test = queue({concurreny: 4})
-test.on('erorr', (err) => {
+const test = queue({concurreny: 4, autostart: true})
+test.on('error', (err) => {
 	console.error(err)
 	process.exit(1)
 })
-test.on('success', (id) => console.error(id + ' ✓'))
+test.on('success', ([type, id]) => console.log(type + ' ' + id + ' ✓'))
 
-[]
-.concat(Object.keys(lines), Object.keys(platforms))
-.map((line) => lines[line])
+Object.values(lines)
 .reduce((acc, x) => acc.concat(Array.isArray(x) ? x : [x]), [])
-.forEach((id) => test.push((cb) => {
-	checkIfRelationExists(id)
-	.then(() => cb(null, id))
-	.catch(cb)
-}))
+.forEach((id) => test.push(checkIfElementExists('relation', id)))
+
+Object.values(platforms)
+.reduce((acc, x) => acc.concat(Array.isArray(x) ? x : [x]), [])
+.forEach((id) => test.push(checkIfElementExists('way', id)))
 
 test.start()
