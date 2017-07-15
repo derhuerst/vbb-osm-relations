@@ -41,8 +41,10 @@ queryOverpass(query)
 	const resolve = (platform) => (cb) => {
 		return findStationByPlatform(platform)
 		.then((id) => {
-			platforms[id] = platform.id
-			console.log(`platform ${platform.id} -> station ${id}`)
+			if (!platforms[id]) platforms[id] = [platform.id]
+			else platforms[id].push(platform.id)
+
+			console.info(`platform ${platform.id} -> station ${id}`)
 			cb()
 		})
 		.catch(cb)
