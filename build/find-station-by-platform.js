@@ -12,6 +12,15 @@ ${type}(${id});
 <<;
 out body;`
 
+const tokenize = (name) => {
+	return slug(name)
+	.toLowerCase()
+	.replace(/^u-bahnhof-/, 'u-')
+	.replace(/-u-bahnhof-/, '-u-')
+	// .replace(/^s-bahnhof-/, 's-')
+	// .replace(/-s-bahnhof-/, '-s-')
+}
+
 const queryParentNames = (type, id) => {
 	return queryOverpass(parentLookup('way', id))
 	.then((data) => {
@@ -34,22 +43,25 @@ const findStationByPlatform = (p) => {
 
 	// try to match a station by own name
 	const name = p.tags && p.tags.name || p.tags.description
-	const n1 = slug(shorten(name))
-	for (let s of stations) {
-		const n2 = slug(s.name)
+	if (name) {
+		const n1 = tokenize(shorten(name))
+		for (let s of stations) {
+			const n2 = tokenize(s.name)
 
-		// todo: this is a very cheap algorithm, improve it
-		if (n1.indexOf(n2) >= 0 || n2.indexOf(n1) >= 0) return Promise.resolve(s.id)
+			// todo: this is a very cheap algorithm, improve it
+			if (n1.indexOf(n2) >= 0 || n2.indexOf(n1) >= 0) return Promise.resolve(s.id)
+		}
 	}
 
 	return queryParentNames('way', p.id)
 	.then((names) => {
 		for (let name of names) {
-			const n1 = slug(shorten(name))
+			const n1 = tokenize(shorten(name))
 			for (let s of stations) {
-				const n2 = slug(s.name)
+				const n2 = tokenize(s.name)
 
 				// todo: this is a very cheap algorithm, improve it
+				// fails with "S+U Hauptbahnhof" & "U Hauptbahnhof"
 				if (n1.indexOf(n2) >= 0 || n2.indexOf(n1) >= 0) return s.id
 			}
 		}
