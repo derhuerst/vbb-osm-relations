@@ -5,7 +5,7 @@ const shorten = require('vbb-short-station-name')
 const stations = require('vbb-stations')('all')
 
 const queryOverpass = require('./query-overpass')
-const {parentLookup, elementName} = require('./helpers')
+const {parentLookup, elementName, findCloseStation} = require('./helpers')
 
 const tokenize = (name) => {
 	return slug(name)

@@ -3,10 +3,9 @@
 const slug = require('slug')
 const shorten = require('vbb-short-station-name')
 const stations = require('vbb-stations')('all')
-const distance = require('gps-distance')
 
 const queryOverpass = require('./query-overpass')
-const {parentLookup, elementName} = require('./helpers')
+const {parentLookup, elementName, findCloseStation} = require('./helpers')
 
 const tokenize = (name) => {
 	return slug(name)
@@ -34,19 +33,6 @@ const match = (osmName, vbbName) => {
 const queryCenter = (id) => {
 	return queryOverpass(`[out:json];way(${id});out center;`)
 	.then((data) => data.elements[0].center)
-}
-
-const findCloseStation = (lat, lon) => {
-	let match = null
-	for (let s of stations) {
-		const c = s.coordinates
-		const d = distance(lat, lon, c.latitude, c.longitude)
-		if (d < .15) {
-			if (match) return null // more than one close-by station
-			match = s
-		}
-	}
-	return match
 }
 
 const findStationByPlatform = (p) => {
