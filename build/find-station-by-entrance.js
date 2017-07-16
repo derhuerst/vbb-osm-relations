@@ -56,6 +56,10 @@ const findStationByEntrance = (e) => {
 			}
 		}
 
+		// try to match a single close-by station
+		const closeBy = findCloseStation(e.lat, e.lon)
+		if (closeBy) return closeBy.id
+
 		throw new Error(`entrance ${e.id} (${name}) does not match`)
 	})
 }

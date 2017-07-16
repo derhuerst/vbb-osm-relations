@@ -3,7 +3,12 @@
 	"description":  "VBB lines and their OSM relations.",
 	"version":      "0.1.0",
 	"main":         "index.js",
-	"files":        ["index.js", "lines.js", "platforms.json"],
+	"files": [
+		"index.js",
+		"lines.js",
+		"platforms.json",
+		"entrances.json"
+	],
 	"keywords":     ["vbb", "bvg", "berlin", "osm", "open street map"],
 	"author":       "Jannis R <mail@jannisr.de>",
 	"homepage":     "https://github.com/derhuerst/vbb-osm-relations",
