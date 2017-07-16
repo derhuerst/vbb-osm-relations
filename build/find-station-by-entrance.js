@@ -12,16 +12,11 @@ const tokenize = (name) => {
 	.toLowerCase()
 	.replace(/^u-bahnhof-/, 'u-')
 	.replace(/-u-bahnhof-/, '-u-')
-	// .replace(/^s-bahnhof-/, 's-')
-	// .replace(/-s-bahnhof-/, '-s-')
 }
 
 const queryParents = (type, id) => {
-	return queryOverpass(parentLookup('way', id))
-	.then((data) => data.elements.filter((el) => {
-		const member = el.members.find((m) => m.ref === id)
-		return member && member.role === 'platform'
-	}))
+	return queryOverpass(parentLookup(type, id))
+	.then((data) => data.elements)
 }
 
 const match = (osmName, vbbName) => {
@@ -30,16 +25,15 @@ const match = (osmName, vbbName) => {
 	return osmName.indexOf(vbbName) >= 0 || vbbName.indexOf(osmName) >= 0
 }
 
-const findStationByPlatform = (p) => {
-	if (p.type !== 'way') {
-		return Promise.reject(new Error('unknown type ' + p.type))
+const findStationByEntrance = (e) => {
+	if (e.type !== 'node') {
+		return Promise.reject(new Error(e.id + ' unknown type ' + e.type))
 	}
 
-	// todo: use platformProduct(p) to match
 	// todo: resolve node coords to match by gps-distance
 
 	// try to match a station by own name
-	const name = elementName(p)
+	const name = elementName(e)
 	if (name) {
 		const osm = tokenize(shorten(name))
 		for (let s of stations) {
@@ -48,7 +42,7 @@ const findStationByPlatform = (p) => {
 		}
 	}
 
-	return queryParents('way', p.id)
+	return queryParents('node', e.id)
 	.then((parents) => {
 		for (let parent of parents) {
 			const name = elementName(parent)
@@ -62,8 +56,8 @@ const findStationByPlatform = (p) => {
 			}
 		}
 
-		throw new Error(`platform ${p.id} (${name}) does not match`)
+		throw new Error(`entrance ${e.id} (${name}) does not match`)
 	})
 }
 
-module.exports = findStationByPlatform
+module.exports = findStationByEntrance

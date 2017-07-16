@@ -23,8 +23,9 @@
 	},
 	"scripts": {
 		"fetch-platforms": "node build/fetch-platforms.js",
-		"build": "npm run fetch-platforms",
+		"fetch-entrances": "node build/fetch-entrances.js",
+		"build": "npm run fetch-platforms fetch-entrances",
 		"test": "node test.js",
-		"prepublish": "npm run build && npm test"
+		"prepublishOnly": "npm run build && npm test"
 	}
 }

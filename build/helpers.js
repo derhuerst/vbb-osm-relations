@@ -6,9 +6,9 @@ ${type}(${id});
 <<;
 out body;`
 
-const platformName = (p) => {
-	if (!p.tags) return null
-	return p.tags.name || p.tags.description || null
+const elementName = (el) => {
+	if (!el.tags) return null
+	return el.tags.name || el.tags.description || null
 }
 
-module.exports = {parentLookup, platformName}
+module.exports = {parentLookup, elementName, platformProduct}
