@@ -38,19 +38,19 @@ queryOverpass(query)
 	q.on('error', (err) => console.error(err.message))
 
 	const platforms = {} // OSM IDs by VBB station ID
-	const resolve = (platform) => (cb) => {
-		return findStationByPlatform(platform)
+	const resolve = (p) => (cb) => {
+		return findStationByPlatform(p)
 		.then((id) => {
-			if (!platforms[id]) platforms[id] = [platform.id]
-			else platforms[id].push(platform.id)
+			if (!platforms[id]) platforms[id] = [p.id]
+			else platforms[id].push(p.id)
 
-			console.info(`platform ${platform.id} -> station ${id}`)
+			console.info(`platform ${p.id} -> station ${id}`)
 			cb()
 		})
 		.catch(cb)
 	}
 
-	for (let platform of data.elements) q.push(resolve(platform))
+	for (let p of data.elements) q.push(resolve(p))
 	q.start()
 
 	q.on('end', () => {

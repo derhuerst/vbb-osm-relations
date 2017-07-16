@@ -5,12 +5,7 @@ const shorten = require('vbb-short-station-name')
 const stations = require('vbb-stations')('all')
 
 const queryOverpass = require('./query-overpass')
-
-const parentLookup = (type, id) => `\
-[out:json];
-${type}(${id});
-<<;
-out body;`
+const {parentLookup} = require('./helpers')
 
 const tokenize = (name) => {
 	return slug(name)
@@ -66,7 +61,7 @@ const findStationByPlatform = (p) => {
 			}
 		}
 
-		throw new Error(`platform ${p.id} does not match`)
+		throw new Error(`platform ${p.id} (${name}) does not match`)
 	})
 }
 
