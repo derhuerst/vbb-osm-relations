@@ -64,16 +64,13 @@ const findStationByPlatform = (p) => {
 			}
 		}
 
-		return queryCenter(p.id)
-		.then((center) => {
-			// todo: filter stations by platformProduct(p)
+		// todo: filter stations by platformProduct(p)
 
-			// try to match a single close-by station
-			const closeBy = findCloseStation(center.lat, center.lon)
-			if (closeBy) return closeBy.id
+		// try to match a single close-by station
+		const closeBy = findCloseStation(p.center.lat, p.center.lon)
+		if (closeBy) return closeBy.id
 
-			throw new Error(`platform ${p.id} (${name}) does not match`)
-		})
+		throw new Error(`platform ${p.id} (${name}) does not match`)
 	})
 }
 
