@@ -1,6 +1,10 @@
 # *vbb-osm-relations*
 
-**VBB lines and their OSM relations.**
+**VBB lines, platforms and station entrances and their [OSM](https://openstreetmap.org/) relations.**
+
+Almost all VBB infrastructure is mapped in OSM, but the individual elements are not always tagged with the station they belong to. This module contains those that can be matched with VBB stations *without ambiguity*, either by distance or by similar names.
+
+**The intended future state is that all lines, platforms and entrances are tagged with proper, machine-readable VBB IDs. Right now, this is a brittle hack to still make use of the data.**
 
 [![npm version](https://img.shields.io/npm/v/vbb-osm-relations.svg)](https://www.npmjs.com/package/vbb-osm-relations)
 [![build status](https://img.shields.io/travis/derhuerst/vbb-osm-relations.svg)](https://travis-ci.org/derhuerst/vbb-osm-relations)
@@ -17,12 +21,17 @@ npm install vbb-osm-relations
 
 ## Usage
 
-To get the relations of VBB lines:
+Each value is an [OSM element ID](#todo):
 
 ```js
-const relations = require('vbb-osm-relations/lines')
+const lines = require('vbb-osm-relations/lines')
+lines.U7 // 58425
 
-relations.U7 // 58425
+const platforms = require('vbb-osm-relations/platforms')
+platforms['900000009202'] // todo
+
+const entrances = require('vbb-osm-relations/entrances')
+entrances['900000009202'] // todo
 ```
 
 
