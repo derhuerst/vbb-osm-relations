@@ -4,6 +4,7 @@ const path = require('path')
 const queue = require('queue')
 const fs = require('fs')
 
+const {bbox} = require('./helpers')
 const queryOverpass = require('./query-overpass')
 const findStationByPlatform = require('./find-station-by-platform')
 
@@ -11,12 +12,6 @@ const showError = (err) => {
 	console.error(err)
 	process.exit(1)
 }
-
-const south = 52.364699
-const west = 13.158187
-const north = 52.640563
-const east = 13.640899
-const bbox = [south, west, north, east].join(',')
 
 const query = `\
 [out:json][timeout:25];

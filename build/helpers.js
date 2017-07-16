@@ -3,6 +3,12 @@
 const stations = require('vbb-stations')('all')
 const distance = require('gps-distance')
 
+const south = 52.364699
+const west = 13.158187
+const north = 52.640563
+const east = 13.640899
+const bbox = [south, west, north, east].join(',')
+
 const parentLookup = (type, id) => `\
 [out:json];
 ${type}(${id});
@@ -27,4 +33,4 @@ const findCloseStation = (lat, lon) => {
 	return match
 }
 
-module.exports = {parentLookup, elementName, findCloseStation}
+module.exports = {bbox, parentLookup, elementName, findCloseStation}
