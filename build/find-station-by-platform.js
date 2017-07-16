@@ -5,7 +5,7 @@ const shorten = require('vbb-short-station-name')
 const stations = require('vbb-stations')('all')
 
 const queryOverpass = require('./query-overpass')
-const {parentLookup} = require('./helpers')
+const {parentLookup, platformName} = require('./helpers')
 
 const tokenize = (name) => {
 	return slug(name)
@@ -16,17 +16,18 @@ const tokenize = (name) => {
 	// .replace(/-s-bahnhof-/, '-s-')
 }
 
-const queryParentNames = (type, id) => {
+const queryParents = (type, id) => {
 	return queryOverpass(parentLookup('way', id))
-	.then((data) => {
-		return data.elements.reduce((names, el) => {
-			const member = el.members.find((m) => m.ref === id)
-			if (!member || member.role !== 'platform') return names
-			const name = el.tags && el.tags.name || el.tags.description
-			if (name) names.push(name)
-			return names
-		}, [])
-	})
+	.then((data) => data.elements.filter((el) => {
+		const member = el.members.find((m) => m.ref === id)
+		return member && member.role === 'platform'
+	}))
+}
+
+const match = (osmName, vbbName) => {
+	// todo: this is a very cheap algorithm, improve it
+	// fails with "S+U Hauptbahnhof" & "U Hauptbahnhof"
+	return osmName.indexOf(vbbName) >= 0 || vbbName.indexOf(osmName) >= 0
 }
 
 const findStationByPlatform = (p) => {
@@ -37,27 +38,26 @@ const findStationByPlatform = (p) => {
 	// todo: resolve node coords to match by gps-distance
 
 	// try to match a station by own name
-	const name = p.tags && p.tags.name || p.tags.description
+	const name = platformName(p)
 	if (name) {
-		const n1 = tokenize(shorten(name))
+		const osm = tokenize(shorten(name))
 		for (let s of stations) {
-			const n2 = tokenize(s.name)
-
-			// todo: this is a very cheap algorithm, improve it
-			if (n1.indexOf(n2) >= 0 || n2.indexOf(n1) >= 0) return Promise.resolve(s.id)
+			const vbb = tokenize(s.name)
+			if (match(osm, vbb)) return Promise.resolve(s.id)
 		}
 	}
 
-	return queryParentNames('way', p.id)
-	.then((names) => {
-		for (let name of names) {
-			const n1 = tokenize(shorten(name))
-			for (let s of stations) {
-				const n2 = tokenize(s.name)
+	return queryParents('way', p.id)
+	.then((parents) => {
+		for (let parent of parents) {
+			const name = platformName(parent)
+			if (!name) continue
 
-				// todo: this is a very cheap algorithm, improve it
-				// fails with "S+U Hauptbahnhof" & "U Hauptbahnhof"
-				if (n1.indexOf(n2) >= 0 || n2.indexOf(n1) >= 0) return s.id
+			const osm = tokenize(shorten(name))
+			for (let s of stations) {
+				const vbb = tokenize(s.name)
+
+				if (match(osm, vbb)) return s.id
 			}
 		}
 
