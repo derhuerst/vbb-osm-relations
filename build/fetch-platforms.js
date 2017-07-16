@@ -26,9 +26,7 @@ const query = `\
 	relation["public_transport"="platform"]["subway"="yes"](${bbox});
 	relation["railway"="platform"]["subway"="yes"](${bbox});
 );
-out body;
->;
-out skel qt;`
+out body;`
 
 const dest = path.join(__dirname, '../platforms.json')
 

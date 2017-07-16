@@ -17,7 +17,7 @@ const tokenize = (name) => {
 }
 
 const queryParents = (type, id) => {
-	return queryOverpass(parentLookup('way', id))
+	return queryOverpass(parentLookup(type, id))
 	.then((data) => data.elements.filter((el) => {
 		const member = el.members.find((m) => m.ref === id)
 		return member && member.role === 'platform'
@@ -32,7 +32,7 @@ const match = (osmName, vbbName) => {
 
 const findStationByPlatform = (p) => {
 	if (p.type !== 'way') {
-		return Promise.reject(new Error('unknown type ' + p.type))
+		return Promise.reject(new Error(p.id + ' unknown type ' + p.type))
 	}
 
 	// todo: use platformProduct(p) to match
