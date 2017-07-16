@@ -31,8 +31,8 @@ const match = (osmName, vbbName) => {
 	return osmName.indexOf(vbbName) >= 0 || vbbName.indexOf(osmName) >= 0
 }
 
-const queryCenter = (type, id) => {
-	return queryOverpass(`[out:json];${type}(${id});out center;`)
+const queryCenter = (id) => {
+	return queryOverpass(`[out:json];way(${id});out center;`)
 	.then((data) => data.elements[0].center)
 }
 
@@ -53,8 +53,6 @@ const findStationByPlatform = (p) => {
 	if (p.type !== 'way') {
 		return Promise.reject(new Error(p.id + ' unknown type ' + p.type))
 	}
-
-	// todo: resolve node coords to match by gps-distance
 
 	// try to match a station by own name
 	const name = elementName(p)
@@ -80,16 +78,16 @@ const findStationByPlatform = (p) => {
 			}
 		}
 
-		return queryCenter('way', p.id)
-	})
-	.then((center) => {
-		// todo: filter stations by platformProduct(p)
+		return queryCenter(p.id)
+		.then((center) => {
+			// todo: filter stations by platformProduct(p)
 
-		// try to match a single close-by station
-		const closeBy = findCloseStation(center.lat, center.lon)
-		if (closeBy) return closeBy.id
+			// try to match a single close-by station
+			const closeBy = findCloseStation(center.lat, center.lon)
+			if (closeBy) return closeBy.id
 
-		throw new Error(`platform ${p.id} (${name}) does not match`)
+			throw new Error(`platform ${p.id} (${name}) does not match`)
+		})
 	})
 }
 
