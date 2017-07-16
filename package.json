@@ -13,6 +13,7 @@
 	"engines":      {"node": ">=6"},
 	"devDependencies": {
 		"fetch-ponyfill": "^4.1.0",
+		"gps-distance": "0.0.4",
 		"lru-cache": "^4.1.1",
 		"p-retry": "^1.0.0",
 		"pinkie-promise": "^2.0.1",

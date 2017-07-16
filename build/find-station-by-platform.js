@@ -3,6 +3,7 @@
 const slug = require('slug')
 const shorten = require('vbb-short-station-name')
 const stations = require('vbb-stations')('all')
+const distance = require('gps-distance')
 
 const queryOverpass = require('./query-overpass')
 const {parentLookup, elementName} = require('./helpers')
@@ -30,12 +31,29 @@ const match = (osmName, vbbName) => {
 	return osmName.indexOf(vbbName) >= 0 || vbbName.indexOf(osmName) >= 0
 }
 
+const queryCenter = (type, id) => {
+	return queryOverpass(`[out:json];${type}(${id});out center;`)
+	.then((data) => data.elements[0].center)
+}
+
+const findCloseStation = (lat, lon) => {
+	let match = null
+	for (let s of stations) {
+		const c = s.coordinates
+		const d = distance(lat, lon, c.latitude, c.longitude)
+		if (d < .15) {
+			if (match) return null // more than one close-by station
+			match = s
+		}
+	}
+	return match
+}
+
 const findStationByPlatform = (p) => {
 	if (p.type !== 'way') {
 		return Promise.reject(new Error(p.id + ' unknown type ' + p.type))
 	}
 
-	// todo: use platformProduct(p) to match
 	// todo: resolve node coords to match by gps-distance
 
 	// try to match a station by own name
@@ -61,6 +79,15 @@ const findStationByPlatform = (p) => {
 				if (match(osm, vbb)) return s.id
 			}
 		}
+
+		return queryCenter('way', p.id)
+	})
+	.then((center) => {
+		// todo: filter stations by platformProduct(p)
+
+		// try to match a single close-by station
+		const closeBy = findCloseStation(center.lat, center.lon)
+		if (closeBy) return closeBy.id
 
 		throw new Error(`platform ${p.id} (${name}) does not match`)
 	})

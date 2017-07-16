@@ -11,4 +11,4 @@ const elementName = (el) => {
 	return el.tags.name || el.tags.description || null
 }
 
-module.exports = {parentLookup, elementName, platformProduct}
+module.exports = {parentLookup, elementName}
