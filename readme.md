@@ -7,7 +7,7 @@ Almost all VBB infrastructure is mapped in OSM, but the individual elements are 
 **The intended future state is that all lines, platforms and entrances are tagged with proper, machine-readable VBB IDs. Right now, this is a brittle hack to still make use of the data.**
 
 [![npm version](https://img.shields.io/npm/v/vbb-osm-relations.svg)](https://www.npmjs.com/package/vbb-osm-relations)
-[![build status](https://img.shields.io/travis/derhuerst/vbb-osm-relations.svg)](https://travis-ci.org/derhuerst/vbb-osm-relations)
+[![build status](https://app.codeship.com/projects/faaded10-4d47-0135-ea45-72e8c5ccfe37/status?branch=master)](https://app.codeship.com/projects/233154)
 [![dependency status](https://img.shields.io/david/derhuerst/vbb-osm-relations.svg)](https://david-dm.org/derhuerst/vbb-osm-relations)
 [![dev dependency status](https://img.shields.io/david/dev/derhuerst/vbb-osm-relations.svg)](https://david-dm.org/derhuerst/vbb-osm-relations#info=devDependencies)
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/vbb-osm-relations.svg)
