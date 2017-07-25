@@ -31,7 +31,7 @@ out tags center;`
 const dest = path.join(__dirname, '../platforms.json')
 
 queryOverpass(query)
-.then((data) => {
+.then((elements) => {
 	const q = queue({concurrency: 2})
 	q.on('error', (err) => console.error(err.message))
 
@@ -48,7 +48,7 @@ queryOverpass(query)
 		.catch(cb)
 	}
 
-	for (let p of data.elements) q.push(resolve(p))
+	for (let p of elements) q.push(resolve(p))
 	q.start()
 
 	q.on('end', () => {

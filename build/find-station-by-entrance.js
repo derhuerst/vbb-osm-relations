@@ -14,10 +14,7 @@ const tokenize = (name) => {
 	.replace(/-u-bahnhof-/, '-u-')
 }
 
-const queryParents = (type, id) => {
-	return queryOverpass(parentLookup(type, id))
-	.then((data) => data.elements)
-}
+const queryParents = (type, id) => queryOverpass(parentLookup(type, id))
 
 const match = (osmName, vbbName) => {
 	// todo: this is a very cheap algorithm, improve it

@@ -18,7 +18,7 @@ const tokenize = (name) => {
 
 const queryParents = (type, id) => {
 	return queryOverpass(parentLookup(type, id))
-	.then((data) => data.elements.filter((el) => {
+	.then((elements) => elements.filter((el) => {
 		const member = el.members.find((m) => m.ref === id)
 		return member && member.role === 'platform'
 	}))
@@ -32,7 +32,7 @@ const match = (osmName, vbbName) => {
 
 const queryCenter = (id) => {
 	return queryOverpass(`[out:json];way(${id});out center;`)
-	.then((data) => data.elements[0].center)
+	.then((elements) => elements[0].center)
 }
 
 const findStationByPlatform = (p) => {
