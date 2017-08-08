@@ -6,7 +6,8 @@ const {fetch} = require('fetch-ponyfill')({Promise: require('pinkie-promise')})
 const assert = require('assert')
 
 const lines = require('./lines')
-const platforms = require('./platforms')
+const platforms = require('./platforms.json')
+const entrances = require('./entrances.json')
 
 const checkIfElementExists = (type, id) => (cb) => {
 	fetch(`https://www.openstreetmap.org/api/0.6/${type}/${id}`)
@@ -31,5 +32,9 @@ Object.values(lines)
 Object.values(platforms)
 .reduce((acc, x) => acc.concat(Array.isArray(x) ? x : [x]), [])
 .forEach((id) => test.push(checkIfElementExists('way', id)))
+
+Object.values(entrances)
+.reduce((acc, x) => acc.concat(Array.isArray(x) ? x : [x]), [])
+.forEach((id) => test.push(checkIfElementExists('node', id)))
 
 test.start()

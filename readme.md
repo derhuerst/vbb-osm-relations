@@ -27,11 +27,13 @@ Each value is an [OSM element ID](#todo):
 const lines = require('vbb-osm-relations/lines')
 lines.U7 // 58425
 
-const platforms = require('vbb-osm-relations/platforms')
-platforms['900000009202'] // todo
+const platforms = require('vbb-osm-relations/platforms.json')
+platforms['900000056104'] // U Bülowstr.
+// [ 391385382, 391385383 ]
 
-const entrances = require('vbb-osm-relations/entrances')
-entrances['900000009202'] // todo
+const entrances = require('vbb-osm-relations/entrances.json')
+entrances['900000130011'] // U Vinetastr.
+// [ 2714518751, 2714518752, 2714518753, 2714518755, 2714518758, 2714518760 ]
 ```
 
 
