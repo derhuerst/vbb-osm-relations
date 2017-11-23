@@ -15,39 +15,39 @@ module.exports = {
 	, RE15: 2607476
 	, RE18: [3705112, 2046557]
 
-	, RB10: 1728821 // only one direction
+	, RB10: 6924342
 	, RB11: 2607477
 	, RB12: 3403239
 	, RB13: 3407777
-	, RB14: 377858 // only one direction
+	, RB14: 2607468
 	// todo: RB19?
 	, RB20: 3366342
-	, RB21: 300432 // only one direction
-	, RB22: 3404080 // only one direction
+	, RB21: [300432, 6593330, 6593453]
+	, RB22: [6593454, 1940412, 6593455]
 	, RB23: 3399395
 	, RB24: [5460156, 5460157]
 	, RB25: 5738329
-	, RB26: 78795 // only one direction
+	, RB26: 7711814
 	, RB27: 3393817
 	, RB31: 2607469
-	, RB33: 319621 // only one direction
-	, RB35: 79826 // only one direction
+	, RB33: 7245456
+	, RB35: 7699401
 	, RB36: 3377492
 	, RB43: [4713362, 4713263]
 	, RB45: 2606968
 	, RB46: 1691355
 	, RB49: 3490614
-	, RB51: 414317 // only one direction
+	, RB51: 7724425
 	, RB54: 3399070
 	, RB55: 3366300
-	, RB60: 373297 // only one direction
+	, RB60: 7711813
 	// todo: RB61
-	, RB62: 6080243 // only one direction
-	, RB63: 374358 // only one direction
-	, RB66: 78500 // only one direction
+	, RB62: 7722438
+	, RB63: 6747407
+	, RB66: 7699251
 	, RB91: 79804 // only one direction
 	, RB93: 79819 // only one direction
-	, OE65: 949590 // only one direction
+	, OE65: 7724739
 
 	// http://www.openstreetmap.org/relation/53181
 	, U1:  58767
@@ -150,7 +150,7 @@ module.exports = {
 	, '147': 282444
 	, '154': 77797
 	, '158': 931834
-	, '160': 35032 // only one direction
+	, '160': 1119074
 	, '161': 102654
 	, '163': 1227013
 	, '164': 35055
@@ -188,7 +188,7 @@ module.exports = {
 	, '256': 238132
 	, '259': 1566261
 	, '260': 35042
-	, '263': 35013 // only one direction
+	, '263': 5633370
 	, '265': 1982833
 	, '269': 77100
 	, '271': 78432
@@ -213,9 +213,9 @@ module.exports = {
 	, '349': 56436
 	, '350': 165138
 	, '353': 1566260
-	, '363': 361004 // only one direction
-	, '369': 83053 // only one direction
-	, '371': 78434 // only one direction
+	, '363': 1231719
+	, '369': 5804140
+	, '371': 1231718
 	, '372': 78436
 	, '373': 78036 // only one direction
 	, '380': 63852
@@ -225,7 +225,7 @@ module.exports = {
 	, '398': 85934
 	, '399': 85352
 	, '806': 1423630
-	, '809': 76873 // only one direction
+	, '809': 3753168
 
 	// http://www.openstreetmap.org/relation/174283
 	, M11: 63605
@@ -265,7 +265,7 @@ module.exports = {
     , N2:  17831
     , N3:  1467807
     , N5:  17734
-    , N6:  2202086 // only one direction
+    , N6:  3357470
     , N7:  78439
     , N8:  17735
     , N9:  1662155
