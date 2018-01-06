@@ -29,7 +29,7 @@
 		"fetch-ponyfill": "^4.1.0",
 		"gps-distance": "0.0.4",
 		"lru-cache": "^4.1.1",
-		"pinkie-promise": "^2.0.1",
+		"pinkie-promise": "^2.0.2",
 		"queue": "^4.4.0",
 		"slug": "^0.9.1",
 		"vbb-short-station-name": "^0.4.0",
