@@ -26,7 +26,7 @@
 	},
 	"devDependencies": {
 		"@derhuerst/query-overpass": "^0.1.0",
-		"fetch-ponyfill": "^4.1.0",
+		"fetch-ponyfill": "^5.0.0",
 		"gps-distance": "0.0.4",
 		"lru-cache": "^4.1.1",
 		"pinkie-promise": "^2.0.1",
