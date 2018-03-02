@@ -11,6 +11,7 @@ Almost all VBB infrastructure is mapped in OSM, but the individual elements are 
 [![dependency status](https://img.shields.io/david/derhuerst/vbb-osm-relations.svg)](https://david-dm.org/derhuerst/vbb-osm-relations)
 [![dev dependency status](https://img.shields.io/david/dev/derhuerst/vbb-osm-relations.svg)](https://david-dm.org/derhuerst/vbb-osm-relations#info=devDependencies)
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/vbb-osm-relations.svg)
+[![support me on Patreon](https://img.shields.io/badge/support%20me-on%20patreon-fa7664.svg)](https://patreon.com/derhuerst)
 
 
 ## Installing

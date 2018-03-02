@@ -17,7 +17,7 @@ const elementName = (el) => {
 const findCloseStation = (lat, lon) => {
 	let match = null
 	for (let s of stations) {
-		const c = s.coordinates
+		const c = s.location
 		const d = distance(lat, lon, c.latitude, c.longitude)
 		if (d < .15) {
 			if (match) return null // more than one close-by station
