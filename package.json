@@ -41,7 +41,6 @@
 		"fetch-platforms": "node build/fetch-platforms.js",
 		"fetch-entrances": "node build/fetch-entrances.js",
 		"build": "npm run fetch-platforms && npm run fetch-entrances",
-		"test": "node test.js",
-		"prepublishOnly": "npm run build && npm test"
+		"test": "node test.js"
 	}
 }
