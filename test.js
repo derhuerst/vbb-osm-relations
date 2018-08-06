@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 'use strict'
 
+const Boom = require('boom')
 const queue = require('queue')
 const {fetch} = require('fetch-ponyfill')({Promise: require('pinkie-promise')})
 const assert = require('assert')
@@ -12,7 +13,12 @@ const entrances = require('./entrances.json')
 const checkIfElementExists = (type, id) => (cb) => {
 	fetch(`https://www.openstreetmap.org/api/0.6/${type}/${id}`)
 	.then((res) => {
-		if (!res.ok) return cb(new Error('response not ok at ' + type + ' ' + id))
+		if (!res.ok) {
+			return cb(new Boom(`${type} ${id}: ${res.statusText}`, {
+				statusCode: res.status,
+				data: {type, id}
+			}))
+		}
 		cb(null, [type, id])
 	})
 	.catch(cb)
