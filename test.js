@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 'use strict'
 
+const throttle = require('p-throttle')
 const Boom = require('boom')
 const queue = require('queue')
 const {fetch} = require('fetch-ponyfill')({Promise: require('pinkie-promise')})
@@ -10,8 +11,14 @@ const lines = require('./lines')
 const platforms = require('./platforms.json')
 const entrances = require('./entrances.json')
 
+const userAgent = 'https://github.com/derhuerst/vbb-osm-relations test'
+
+const throttledFetch = throttle(fetch, 100, 10) // 100 reqs per 10s
+
 const checkIfElementExists = (type, id) => (cb) => {
-	fetch(`https://www.openstreetmap.org/api/0.6/${type}/${id}`)
+	throttledFetch(`https://www.openstreetmap.org/api/0.6/${type}/${id}`, {
+		headers: {'user-agent': userAgent}
+	})
 	.then((res) => {
 		if (!res.ok) {
 			return cb(new Boom(`${type} ${id}: ${res.statusText}`, {
