@@ -37,7 +37,7 @@ test.on('error', (err) => {
 	process.exit(1)
 })
 test.on('success', ([type, id]) => console.log(type + ' ' + id + ' ✓'))
-
+console.log("Thank you");
 Object.values(lines)
 .reduce((acc, x) => acc.concat(Array.isArray(x) ? x : [x]), [])
 .forEach((id) => test.push(checkIfElementExists('relation', id)))
