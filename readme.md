@@ -2,7 +2,7 @@
 
 **VBB lines, platforms and station entrances and their [OSM](https://openstreetmap.org/) relations.**
 
-Almost all VBB infrastructure is mapped in OSM, but the individual elements are not always tagged with the station they belong to. This module contains those that can be matched with VBB stations *without ambiguity*, either by distance or by similar names.
+Almost every other VBB infrastructure is mapped in OSM, but the individual elements are not always tagged with the station they belong to. This module contains those that can be matched with VBB stations *without ambiguity*, either by distance or by similar names.
 
 **The intended future state is that all lines, platforms and entrances are tagged with proper, machine-readable VBB IDs. Right now, this is a brittle hack to still make use of the data.**
 
