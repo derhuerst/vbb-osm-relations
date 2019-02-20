@@ -30,7 +30,7 @@
 		"fetch-ponyfill": "^6.0.0",
 		"gps-distance": "0.0.4",
 		"lru-cache": "^5.0.0",
-		"p-throttle": "^2.0.0",
+		"p-throttle": "^3.0.0",
 		"pinkie-promise": "^2.0.1",
 		"queue": "^5.0.0",
 		"slug": "^0.9.1",
