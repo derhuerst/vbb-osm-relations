@@ -35,7 +35,7 @@
 		"queue": "^6.0.0",
 		"slug": "^1.0.0",
 		"vbb-short-station-name": "^1.0.0",
-		"vbb-stations": "^6.0.0"
+		"vbb-stations": "^7.0.0"
 	},
 	"scripts": {
 		"fetch-platforms": "node build/fetch-platforms.js",
