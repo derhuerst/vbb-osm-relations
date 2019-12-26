@@ -224,7 +224,8 @@ module.exports = {
 	, '396': 85388
 	, '398': 85934
 	, '399': 85352
-	, '806': 1423630
+	// there seem to be *two* lines, but one is not mappen
+	, '806': 3401822
 	, '809': 3753168
 
 	// http://www.openstreetmap.org/relation/174283

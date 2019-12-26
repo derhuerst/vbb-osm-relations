@@ -7,3 +7,5 @@ npm-debug.log
 
 platforms.json
 entrances.json
+
+/package-lock.json
